@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "data-seed-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "seed-generator is an npm package designed to simplify the process of adding data to the database",
   "main": "index.js",
   "scripts": {
