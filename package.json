@@ -1,0 +1,57 @@
+{
+  "type": "module",
+  "name": "seed-generator",
+  "version": "1.0.3",
+  "description": "seed-generator is an npm package designed to simplify the process of adding data to the database",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "publish": "npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoeMansourr/seed-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JoeMansourr/seed-generator/issues"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js",
+      "mjs"
+    ],
+    "transform": {
+      "^.+\\.(js|mjs)$": "babel-jest"
+    },
+    "transformIgnorePatterns": []
+  },
+  "keywords": [
+    "seed",
+    "seed-data",
+    "random-data",
+    "data",
+    "seeder",
+    "mongoose",
+    "sequelize",
+    "sql",
+    "no-sql"
+  ],
+  "author": "JoeMansourr",
+  "license": "MIT",
+  "dependencies": {
+    "casual": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "mongoose": "^7.6.3",
+    "mysql2": "^3.6.2",
+    "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-typescript": "^7.23.2",
+    "babel-jest": "^29.7.0",
+    "faker": "^6.6.6",
+    "jest": "^29.7.0"
+  }
+}
