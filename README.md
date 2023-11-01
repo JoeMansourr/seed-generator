@@ -1,21 +1,23 @@
-<h1><i>data-seed-generator</i></h1>
+# data-seed-generator
 
-<b>data-seed-generator</b> is an npm package designed to simplify the process of adding random data to your database using either Mongoose or Sequelize ORM. It's particularly useful for generating seed data for testing and development purposes.
+**data-seed-generator** is an npm package designed to simplify the process of adding random data to your database using either Mongoose or Sequelize ORM. It's particularly useful for generating seed data for testing and development purposes.
 Installation
 
 You can install data-seed-generator via npm or yarn:
 
 bash
 
+# Installation
+```
 npm install data-seed-generator
-# or
+or
 yarn add data-seed-generator
-
-Usage:
-With Mongoose
+```
+# Usage:
+## With Mongoose
 
 javascript
-
+```
 import { generateSeedDataMongoose } from 'data-seed-generator';
 
 const numUsers = 10;
@@ -41,11 +43,11 @@ generateSeedDataMongoose(numUsers, mongooseConfig, modelName, customFields)
   .catch((error) => {
     console.error(`Seed data generation failed: ${error}`);
   });
-
-With Sequelize:
+```
+## With Sequelize:
 
 javascript
-
+```
 import { generateSeedDataSequelize } from 'data-seed-generator';
 import { DataTypes } from 'sequelize';
 
@@ -78,35 +80,35 @@ generateSeedDataSequelize(numUsers, customTableSchema, tableName, sequelizeConfi
   .catch((error) => {
     console.error(`Seed data generation failed: ${error}`);
   });
-
-Documentation:
+```
+# Documentation:
 
     generateSeedDataMongoose(numUsers, mongooseConfig, modelName, customFields): Generates and seeds random data using Mongoose.
     generateSeedDataSequelize(numUsers, customTableSchema, tableName, sequelizeConfig): Generates and seeds random data using Sequelize.
 
-Configuration:
+# Configuration:
 
 Before using seed-generator, you need to configure your database connections and the structure of the data you want to seed. Make sure to define:
 
-    Mongoose: Provide the MongoDB connection URI, model name, and custom field definitions.
-    Sequelize: Configure the dialect, host, username, password, and database name. Define your custom table schema.
+    - Mongoose: Provide the MongoDB connection URI, model name, and custom field definitions.
+    - Sequelize: Configure the dialect, host, username, password, and database name. Define your custom table schema.
 
-Testing:
+# Testing:
 
 You can run tests for data-seed-generator using Jest:
 
 bash
-
+```
 npm test
-# or
+or
 yarn test
-
-License
+```
+# License
 
 This package is licensed under the MIT License.
 Author: Joe Mansour
 
-Contributing:
+# Contributing:
 
 Contributions are welcome. Feel free to open issues and pull requests.
 
