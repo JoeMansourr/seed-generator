@@ -10,33 +10,36 @@ import casual from "casual";
  * @param {*} sequelizeConfig 
  */
 export async function generateSeedDataSequelize(numOfRecords, customTableSchema, tableName, sequelizeConfig = {}) {
-  /**
-   * Create a Sequelize instance
-   */
+  // Create a Sequelize instance
   const sequelize = new Sequelize(sequelizeConfig);
+  let Model;
 
-  /**
-   * Define a dynamic Sequelize model based on the customTableSchema object
-   */
-  const DynamicModel = sequelize.define(tableName, customTableSchema);
+  // Check if the model already exists
+  if (sequelize.isDefined(tableName)) {
+    Model = sequelize.model(tableName);
+  } else {
+    // If the model doesn't exist, define it
+    Model = sequelize.define(tableName, customTableSchema);
+  }
 
   const sequelizeSeedData = [];
 
   for (let i = 0; i < numOfRecords; i++) {
     const dynamicRecord = {};
 
-    /**
-     * Generate random data for each field defined in customTableSchema
-     */
+    // Generate random data for each field defined in customTableSchema
     for (const field in customTableSchema) {
-      dynamicRecord[field] = casual[field] || ""; // Use casual for random data or set a default value
+      dynamicRecord[field] = casual[field] || ''; // Use casual for random data or set a default value
     }
 
     sequelizeSeedData.push(dynamicRecord);
   }
 
-  await DynamicModel.sync({ force: true });
-  return DynamicModel.bulkCreate(sequelizeSeedData);
+  // Drop and recreate the table with the new data
+  await Model.sync({ force: true });
+
+  // Insert the seed data
+  return Model.bulkCreate(sequelizeSeedData);
 }
 
 /**
@@ -54,21 +57,22 @@ export async function generateSeedDataSequelize(numOfRecords, customTableSchema,
 export async function generateSeedDataMongoose(numOfRecords, mongooseConfig, modelName, customFields = {}) {
   await mongoose.connect(mongooseConfig);
 
-  /**
-   * Define a dynamic Mongoose schema based on the customFields object
-   */
-  const dynamicSchema = new mongoose.Schema(customFields);
-
-  const User = mongoose.model(modelName, dynamicSchema);
+  // Check if the model already exists
+  let Model;
+  try {
+    Model = mongoose.model(modelName);
+  } catch (e) {
+    // If the model doesn't exist, create it
+    const dynamicSchema = new mongoose.Schema(customFields);
+    Model = mongoose.model(modelName, dynamicSchema);
+  }
 
   const mongooseSeedData = [];
 
   for (let i = 0; i < numOfRecords; i++) {
     const dynamicRecord = {};
 
-    /**
-     * Generate random data for each field defined in customFields
-     */
+    // Generate random data for each field defined in customFields
     for (const field in customFields) {
       dynamicRecord[field] = casual[field] || ""; // Use casual for random data or set a default value
     }
@@ -76,6 +80,6 @@ export async function generateSeedDataMongoose(numOfRecords, mongooseConfig, mod
     mongooseSeedData.push(dynamicRecord);
   }
 
-  return User.insertMany(mongooseSeedData);
+  return Model.insertMany(mongooseSeedData);
 }
 

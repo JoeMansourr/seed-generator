@@ -30,7 +30,7 @@ describe("Data Seeding", () => {
   });
 
   it("should generate and seed the specified number of users with dynamic fields", async () => {
-    const numUsers = 5;
+    const numUsers = 15;
 
     if (numUsers <= 0) {
       throw new Error("Please specify a number greater than 0.");
@@ -75,6 +75,10 @@ describe("Data Seeding", () => {
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
     };
+
+    if(sequelize.isDefined(tableName)) {
+      await sequelize.drop(tableName);
+    }
 
     const result = await generateSeedDataSequelize(
       numUsers,
