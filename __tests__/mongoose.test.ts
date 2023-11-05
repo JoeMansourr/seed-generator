@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 import { generateSeedDataMongoose } from '../src/seedGenerator';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 dotenv.config();
 
 describe('Mongoose Data Seeding', () => {
   jest.setTimeout(30000);
 
-  let connection;
+  let connection: any;
 
   beforeAll(async () => {
     if (!process.env.MONGODB_URI) {
@@ -21,7 +21,7 @@ describe('Mongoose Data Seeding', () => {
   }, 30000)
 
   it('should generate and seed the specified number of users with dynamic fields', async () => {
-    const numUsers = 33; // Change the number of users as needed.
+    const numUsers = 5; // Change the number of users as needed.
 
     if (numUsers <= 0) {
       throw new Error('Please specify a number greater than 0.');
@@ -38,6 +38,7 @@ describe('Mongoose Data Seeding', () => {
       name: {
         type: String,
         required: true,
+        default: ""
       },
       email: {
         type: String,

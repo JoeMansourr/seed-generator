@@ -9,7 +9,7 @@ import casual from "casual";
  * @param {*} tableName 
  * @param {*} sequelizeConfig 
  */
-export async function generateSeedDataSequelize(numOfRecords, customTableSchema, tableName, sequelizeConfig = {}) {
+export const generateSeedDataSequelize = async (numOfRecords: number, customTableSchema: any, tableName: string, sequelizeConfig = {}) => {
   // Create a Sequelize instance
   const sequelize = new Sequelize(sequelizeConfig);
   let Model;
@@ -25,11 +25,11 @@ export async function generateSeedDataSequelize(numOfRecords, customTableSchema,
   const sequelizeSeedData = [];
 
   for (let i = 0; i < numOfRecords; i++) {
-    const dynamicRecord = {};
+    const dynamicRecord: any = {};
 
     // Generate random data for each field defined in customTableSchema
     for (const field in customTableSchema) {
-      dynamicRecord[field] = casual[field] || ''; // Use casual for random data or set a default value
+      dynamicRecord[field] = casual[field as keyof (typeof casual)] || ''; // Use casual for random data or set a default value
     }
 
     sequelizeSeedData.push(dynamicRecord);
@@ -54,7 +54,7 @@ export async function generateSeedDataSequelize(numOfRecords, customTableSchema,
 /**
  * Generate seed data for mongoose
  */
-export async function generateSeedDataMongoose(numOfRecords, mongooseConfig, modelName, customFields = {}) {
+export const generateSeedDataMongoose = async (numOfRecords: number, mongooseConfig: any, modelName: string, customFields = {}) => {
   await mongoose.connect(mongooseConfig);
 
   // Check if the model already exists
@@ -70,11 +70,11 @@ export async function generateSeedDataMongoose(numOfRecords, mongooseConfig, mod
   const mongooseSeedData = [];
 
   for (let i = 0; i < numOfRecords; i++) {
-    const dynamicRecord = {};
+    const dynamicRecord: any = {};
 
     // Generate random data for each field defined in customFields
     for (const field in customFields) {
-      dynamicRecord[field] = casual[field] || ""; // Use casual for random data or set a default value
+      dynamicRecord[field] = casual[field as keyof (typeof casual)] || ""; // Use casual for random data or set a default value
     }
 
     mongooseSeedData.push(dynamicRecord);

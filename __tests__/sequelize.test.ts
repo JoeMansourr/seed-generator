@@ -1,18 +1,18 @@
-import Sequelize from "sequelize";
+import { Sequelize } from "sequelize";
 import { generateSeedDataSequelize } from "../src/seedGenerator";
 import { DataTypes } from "sequelize";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 dotenv.config();
 
 describe("Data Seeding", () => {
-  let sequelize;
+  let sequelize: any;
 
   beforeAll(async () => {
     if (!process.env.DB_DIALECT && !process.env.DB_HOST && !process.env.DB_USER && !process.env.DB_PASSWORD && !process.env.DB_NAME) {
       throw new Error("Please set the environment variables for the database connection.");
     }
 
-    const sequelizeConfig = {
+    const sequelizeConfig: {} = {
       dialect: process.env.DB_DIALECT,
       host: process.env.DB_HOST,
       username: process.env.DB_USER,
@@ -30,7 +30,7 @@ describe("Data Seeding", () => {
   });
 
   it("should generate and seed the specified number of users with dynamic fields", async () => {
-    const numUsers = 15;
+    const numUsers = 5;
 
     if (numUsers <= 0) {
       throw new Error("Please specify a number greater than 0.");

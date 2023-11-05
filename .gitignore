@@ -39,3 +39,6 @@ out/
 .idea/
 *.swp
 *.swo
+lib/
+tsconfig-cjs.json
+.babelrc
