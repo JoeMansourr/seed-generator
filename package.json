@@ -1,7 +1,6 @@
 {
-  "type": "module",
   "name": "data-seed-generator",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "seed-generator is an npm package designed to simplify the process of adding data to the database",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
